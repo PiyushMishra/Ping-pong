@@ -16,6 +16,13 @@
     </dependency>
   </dependencies>
   <build>
+    <plugins>
+    <plugin>
+    <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-maven-plugin</artifactId>
+        <version>9.3.0.M1</version>
+    </plugin>
+    </plugins>
     <finalName>Ping-pong</finalName>
   </build>
 </project>
