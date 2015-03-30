@@ -10,13 +10,10 @@ function getElement(elementId) {
 // set image in canvas
 function setImageInCanvas(canvas) {
     var canvasContext = canvas.getContext("2d")
-	var image = new Image()
-	image.setAttribute("src", "images/tball.jpeg")
-	image.setAttribute("width", "1px")
-	image.setAttribute("height", "10px")
-	image.setAttribute("size", "10")
-	image.setAttribute("class", "canvas")
-	canvasContext.drawImage(image, 320, 50)
+	canvasContext.beginPath()
+    canvasContext.arc(350,480,10,Math.PI*2,false)
+    canvasContext.closePath()
+    canvasContext.fill()
 }
 
 // draw image
