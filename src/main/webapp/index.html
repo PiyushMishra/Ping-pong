@@ -1,8 +1,14 @@
 <html>
-<head><script type="text/javascript" src="js/loop.js"></script></head>
+<head>
+	<title>Ping-Pong game development</title>
+<script type="text/javascript" src="js/player.js"></script>
+<script type="text/javascript" src="js/canvas.js"></script>
+<link rel="stylesheet" type="text/css" href="css/canvas.css">
+</head>
 <body>
-<h2>Hello World!</h2>
-
- <input type="button" onclick="go()" value="Display JS Array"/>
+<h2>Ping pong</h2>
+ <center><canvas id="canvas" width="700" height="500" class="canvas"></canvas></center>
+ <input type="button" onclick="getPlayerInfo()" value="Display player info"/>
+ <input type="button" onclick = "drawImage('canvas')" value="draw image"/>
 </body>
 </html>
