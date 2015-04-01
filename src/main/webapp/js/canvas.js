@@ -41,28 +41,35 @@ function updateCanvas() {
 // update paddle positions
 
 function upadteFirstPaddlePositionUp() {
-	ctx.clearRect(firstPaddle_x, firstPaddle_y, paddleWidth, paddleHeight);
-	var paddle = new Paddle(firstPaddle_x, firstPaddle_y, paddleWidth, paddleHeight)
-	firstPaddle_y -= paddle_displacement
+	if (firstPaddle_y != 0) {
+		ctx.clearRect(firstPaddle_x, firstPaddle_y, paddleWidth, paddleHeight);
+		var paddle = new Paddle(firstPaddle_x, firstPaddle_y, paddleWidth, paddleHeight)
+		firstPaddle_y -= paddle_displacement
+	}
 }
 
 function updateSecondPaddlePositionUp() {
-	ctx.clearRect(secondPaddle_x, secondPaddle_y, paddleWidth, paddleHeight);
-	var paddle = new Paddle(secondPaddle_x, secondPaddle_y, paddleWidth, paddleHeight)
-	secondPaddle_y -= paddle_displacement
+	if (secondPaddle_y != 0) {
+		ctx.clearRect(secondPaddle_x, secondPaddle_y, paddleWidth, paddleHeight);
+		var paddle = new Paddle(secondPaddle_x, secondPaddle_y, paddleWidth, paddleHeight)
+		secondPaddle_y -= paddle_displacement
+	}
 }
 
 function upadteFirstPaddlePositionDown() {
-	ctx.clearRect(firstPaddle_x, firstPaddle_y, paddleWidth, paddleHeight);
-	var paddle = new Paddle(firstPaddle_x, firstPaddle_y, paddleWidth, paddleHeight)
-	firstPaddle_y += paddle_displacement
+	if (firstPaddle_y != (canvasWidth - paddleHeight)) {
+		ctx.clearRect(firstPaddle_x, firstPaddle_y, paddleWidth, paddleHeight);
+		var paddle = new Paddle(firstPaddle_x, firstPaddle_y, paddleWidth, paddleHeight)
+		firstPaddle_y += paddle_displacement
+	}
 }
 
 function updateSecondPaddlePositionDown() {
-	ctx.clearRect(secondPaddle_x, (secondPaddle_y), paddleWidth, paddleHeight);
-	var paddle = new Paddle(secondPaddle_x, secondPaddle_y, paddleWidth, paddleHeight)
-	secondPaddle_y += paddle_displacement
-
+	if (secondPaddle_y != (canvasWidth - paddleHeight)) {
+		ctx.clearRect(secondPaddle_x, (secondPaddle_y), paddleWidth, paddleHeight);
+		var paddle = new Paddle(secondPaddle_x, secondPaddle_y, paddleWidth, paddleHeight)
+		secondPaddle_y += paddle_displacement
+	}
 }
 
 
@@ -70,6 +77,12 @@ function updateSecondPaddlePositionDown() {
 function moveBall() {
 	console.log(ball_y);
 	var ball = new Ball(ball_x, ball_y, radius);
+
+
+	if (ball_x + radius == paddleWidth) {
+
+		ball_y_displacement = -ball_y_displacement;
+	}
 
 	if (ball_y + radius > canvasWidth) {
 		ball_y_displacement = -ball_y_displacement;
@@ -105,7 +118,7 @@ function Ball(ball_x_position, ball_y_position, radius) {
 function Paddle(paddle_x_position, paddle_y_position, width, height) {
 	ctx.beginPath();
 	ctx.rect(paddle_x_position, paddle_y_position, width, height);
-	ctx.fillStyle = 'yellow';
+	ctx.fillStyle = 'RED';
 	ctx.fill();
 	ctx.lineWidth = 7;
 	ctx.strokeStyle = 'black';
