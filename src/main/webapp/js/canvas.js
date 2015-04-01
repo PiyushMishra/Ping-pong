@@ -31,50 +31,50 @@ var secondPaddle_x = canvasHeight - paddleWidth
 var secondPaddle_y = 200
 
 // paddle displacement 
-var paddle_displacement = 60
+var paddle_displacement = 40
 
 // function to repaint the whole canvas on events  
 function updateCanvas() {
 	ctx.clearRect(paddleWidth, 0, canvasHeight - 2 * paddleWidth, canvasWidth);
-	// moveBall()
+	moveBall()
 }
 
 // update paddle positions
 
-function upadteFirstPaddlePositionUp() { 
-	 if (firstPaddle_y > paddle_displacement) {
-	 	ctx.clearRect(firstPaddle_x, firstPaddle_y, paddleWidth, paddleHeight);
+function upadteFirstPaddlePositionUp() {
+	if (firstPaddle_y > paddle_displacement) {
+		ctx.clearRect(firstPaddle_x, firstPaddle_y, paddleWidth, paddleHeight);
 		firstPaddle_y -= paddle_displacement
 		var paddle = new Paddle(firstPaddle_x, firstPaddle_y, paddleWidth, paddleHeight)
 		console.log(firstPaddle_y)
-	 }
+	}
 }
 
 function upadteFirstPaddlePositionDown() {
-		
-	if (paddleHeight + paddle_displacement < (canvasWidth)) {
+
+	if (firstPaddle_y + paddleHeight  <= (canvasWidth)) {
 		ctx.clearRect(firstPaddle_x, firstPaddle_y, paddleWidth, paddleHeight);
 		firstPaddle_y += paddle_displacement
 		var paddle = new Paddle(firstPaddle_x, firstPaddle_y, paddleWidth, paddleHeight)
-		
+
 	}
 }
 
 function updateSecondPaddlePositionUp() {
-	ctx.clearRect(secondPaddle_x, secondPaddle_y, paddleWidth, paddleHeight);
-	if (secondPaddle_y + paddle_displacement != 0) {
+	if (secondPaddle_y  > paddle_displacement) {
+		ctx.clearRect(secondPaddle_x, secondPaddle_y, paddleWidth, paddleHeight);
 		secondPaddle_y -= paddle_displacement
 		var paddle = new Paddle(secondPaddle_x, secondPaddle_y, paddleWidth, paddleHeight)
-		
+
 	}
 }
 
 function updateSecondPaddlePositionDown() {
-	ctx.clearRect(secondPaddle_x, (secondPaddle_y), paddleWidth, paddleHeight);
-	if (secondPaddle_y + paddle_displacement != (canvasWidth - paddleHeight)) {
+	if (secondPaddle_y + paddleHeight <= (canvasWidth)) {
+		ctx.clearRect(secondPaddle_x, (secondPaddle_y), paddleWidth, paddleHeight);
 		secondPaddle_y += paddle_displacement
 		var paddle = new Paddle(secondPaddle_x, secondPaddle_y, paddleWidth, paddleHeight)
-		
+
 	}
 }
 
@@ -86,7 +86,7 @@ function moveBall() {
 
 
 	if (ball_x + radius == paddleWidth) {
-		if ((ball_y + radius >= 0) && (ball_y +radius <=canvasWidth))
+		if ((ball_y + radius >= 0) && (ball_y + radius <= canvasWidth))
 			ball_y_displacement = -ball_y_displacement;
 	}
 
