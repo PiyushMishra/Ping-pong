@@ -29,10 +29,10 @@ var secondPaddle_y = 0
 
 // function to repaint the whole canvas on events  
 function updateCanvas() {
-    ctx.clearRect(0, 0, 700, 500);
+	ctx.clearRect(0, 0, 700, 500);
 	var paddle = new Paddle(0, 200, 20, 100)
 	var paddle = new Paddle(680, 200, 20, 100)
-	moveBall()
+	//moveBall()
 }
 
 // update ball position
@@ -63,8 +63,6 @@ function moveBall() {
 
 // create the ball class
 function Ball(ball_x_position, ball_y_position, radius) {
-	var canvas = document.getElementById(canvasId);
-	var ctx = canvas.getContext("2d");
 	ctx.beginPath();
 	ctx.arc(ball_x_position, ball_y_position, radius, Math.PI * 2, false);
 	ctx.fillStyle = "#C72129";
@@ -83,10 +81,23 @@ function Paddle(paddle_x_position, paddle_y_position, width, height) {
 	ctx.stroke();
 }
 
+// dokeyDown function
+function doKeyDown(e) {
+	if (e.keyCode == 113) //Q
+		console.log("pressed Q");
+	if (e.keyCode == 119) //W
+		console.log("pressed W");
+	if (e.keyCode == 111) //O
+		console.log("pressed O");
+	if (e.keyCode == 112) //P
+		console.log("pressed P");
+}
+
 
 // set interval to repaint canvas to put the illusion of ball movement	
 function init() {
 	var canvas = document.getElementById(canvasId);
+	window.addEventListener("keypress", doKeyDown, true)
 	ctx = canvas.getContext("2d");
 	var interval = setInterval(updateCanvas, 10);
 }
