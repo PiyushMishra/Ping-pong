@@ -31,45 +31,50 @@ var secondPaddle_x = canvasHeight - paddleWidth
 var secondPaddle_y = 200
 
 // paddle displacement 
-var paddle_displacement = 5
+var paddle_displacement = 60
 
 // function to repaint the whole canvas on events  
 function updateCanvas() {
 	ctx.clearRect(paddleWidth, 0, canvasHeight - 2 * paddleWidth, canvasWidth);
-	moveBall()
+	// moveBall()
 }
 
 // update paddle positions
 
-function upadteFirstPaddlePositionUp() {
-	if (firstPaddle_y != 0) {
-		ctx.clearRect(firstPaddle_x, firstPaddle_y, paddleWidth, paddleHeight);
-		var paddle = new Paddle(firstPaddle_x, firstPaddle_y, paddleWidth, paddleHeight)
+function upadteFirstPaddlePositionUp() { 
+	 if (firstPaddle_y > paddle_displacement) {
+	 	ctx.clearRect(firstPaddle_x, firstPaddle_y, paddleWidth, paddleHeight);
 		firstPaddle_y -= paddle_displacement
+		var paddle = new Paddle(firstPaddle_x, firstPaddle_y, paddleWidth, paddleHeight)
+		console.log(firstPaddle_y)
+	 }
+}
+
+function upadteFirstPaddlePositionDown() {
+		
+	if (paddleHeight + paddle_displacement < (canvasWidth)) {
+		ctx.clearRect(firstPaddle_x, firstPaddle_y, paddleWidth, paddleHeight);
+		firstPaddle_y += paddle_displacement
+		var paddle = new Paddle(firstPaddle_x, firstPaddle_y, paddleWidth, paddleHeight)
+		
 	}
 }
 
 function updateSecondPaddlePositionUp() {
-	if (secondPaddle_y != 0) {
-		ctx.clearRect(secondPaddle_x, secondPaddle_y, paddleWidth, paddleHeight);
-		var paddle = new Paddle(secondPaddle_x, secondPaddle_y, paddleWidth, paddleHeight)
+	ctx.clearRect(secondPaddle_x, secondPaddle_y, paddleWidth, paddleHeight);
+	if (secondPaddle_y + paddle_displacement != 0) {
 		secondPaddle_y -= paddle_displacement
-	}
-}
-
-function upadteFirstPaddlePositionDown() {
-	if (firstPaddle_y != (canvasWidth - paddleHeight)) {
-		ctx.clearRect(firstPaddle_x, firstPaddle_y, paddleWidth, paddleHeight);
-		var paddle = new Paddle(firstPaddle_x, firstPaddle_y, paddleWidth, paddleHeight)
-		firstPaddle_y += paddle_displacement
+		var paddle = new Paddle(secondPaddle_x, secondPaddle_y, paddleWidth, paddleHeight)
+		
 	}
 }
 
 function updateSecondPaddlePositionDown() {
-	if (secondPaddle_y != (canvasWidth - paddleHeight)) {
-		ctx.clearRect(secondPaddle_x, (secondPaddle_y), paddleWidth, paddleHeight);
-		var paddle = new Paddle(secondPaddle_x, secondPaddle_y, paddleWidth, paddleHeight)
+	ctx.clearRect(secondPaddle_x, (secondPaddle_y), paddleWidth, paddleHeight);
+	if (secondPaddle_y + paddle_displacement != (canvasWidth - paddleHeight)) {
 		secondPaddle_y += paddle_displacement
+		var paddle = new Paddle(secondPaddle_x, secondPaddle_y, paddleWidth, paddleHeight)
+		
 	}
 }
 
