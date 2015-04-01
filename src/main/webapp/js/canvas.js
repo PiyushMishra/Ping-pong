@@ -18,6 +18,7 @@ var ball_y_displacement = 2;
 // canvas
 var canvasId = "canvas";
 var ctx;
+var interval;
 
 // first paddle coordinates
 var paddleHeight = 150
@@ -26,7 +27,7 @@ var firstPaddle_x = 0
 var firstPaddle_y = 200
 
 // second paddle coordinates
-var secondPaddle_x = 680
+var secondPaddle_x = canvasHeight - paddleWidth
 var secondPaddle_y = 200
 
 // paddle displacement 
@@ -80,8 +81,8 @@ function moveBall() {
 
 
 	if (ball_x + radius == paddleWidth) {
-
-		ball_y_displacement = -ball_y_displacement;
+		if ((ball_y + radius >= 0) && (ball_y +radius <=canvasWidth))
+			ball_y_displacement = -ball_y_displacement;
 	}
 
 	if (ball_y + radius > canvasWidth) {
@@ -118,7 +119,7 @@ function Ball(ball_x_position, ball_y_position, radius) {
 function Paddle(paddle_x_position, paddle_y_position, width, height) {
 	ctx.beginPath();
 	ctx.rect(paddle_x_position, paddle_y_position, width, height);
-	ctx.fillStyle = 'RED';
+	ctx.fillStyle = '#5A0E53';
 	ctx.fill();
 	ctx.lineWidth = 7;
 	ctx.strokeStyle = 'black';
@@ -158,5 +159,5 @@ function init() {
 	ctx = canvas.getContext("2d");
 	var paddle = new Paddle(firstPaddle_x, firstPaddle_y, paddleWidth, paddleHeight)
 	var paddle = new Paddle(secondPaddle_x, secondPaddle_y, paddleWidth, paddleHeight)
-	var interval = setInterval(updateCanvas, 10);
+	interval = setInterval(updateCanvas, 10);
 }
