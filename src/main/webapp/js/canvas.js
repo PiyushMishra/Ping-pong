@@ -20,20 +20,51 @@ var canvasId = "canvas";
 var ctx;
 
 // first paddle coordinates
+var paddleHeight = 150
+var paddleWidth = 20
 var firstPaddle_x = 0
-var firstPaddle_y = 250
+var firstPaddle_y = 200
 
 // second paddle coordinates
-var secondPaddle_x = 350
-var secondPaddle_y = 0
+var secondPaddle_x = 680
+var secondPaddle_y = 200
+
+// paddle displacement 
+var paddle_displacement = 5
 
 // function to repaint the whole canvas on events  
 function updateCanvas() {
-	ctx.clearRect(0, 0, 700, 500);
-	var paddle = new Paddle(0, 200, 20, 100)
-	var paddle = new Paddle(680, 200, 20, 100)
-	//moveBall()
+	ctx.clearRect(paddleWidth, 0, canvasHeight - 2 * paddleWidth, canvasWidth);
+	moveBall()
 }
+
+// update paddle positions
+
+function upadteFirstPaddlePositionUp() {
+	ctx.clearRect(firstPaddle_x, firstPaddle_y, paddleWidth, paddleHeight);
+	var paddle = new Paddle(firstPaddle_x, firstPaddle_y, paddleWidth, paddleHeight)
+	firstPaddle_y -= paddle_displacement
+}
+
+function updateSecondPaddlePositionUp() {
+	ctx.clearRect(secondPaddle_x, secondPaddle_y, paddleWidth, paddleHeight);
+	var paddle = new Paddle(secondPaddle_x, secondPaddle_y, paddleWidth, paddleHeight)
+	secondPaddle_y -= paddle_displacement
+}
+
+function upadteFirstPaddlePositionDown() {
+	ctx.clearRect(firstPaddle_x, firstPaddle_y, paddleWidth, paddleHeight);
+	var paddle = new Paddle(firstPaddle_x, firstPaddle_y, paddleWidth, paddleHeight)
+	firstPaddle_y += paddle_displacement
+}
+
+function updateSecondPaddlePositionDown() {
+	ctx.clearRect(secondPaddle_x, (secondPaddle_y), paddleWidth, paddleHeight);
+	var paddle = new Paddle(secondPaddle_x, secondPaddle_y, paddleWidth, paddleHeight)
+	secondPaddle_y += paddle_displacement
+
+}
+
 
 // update ball position
 function moveBall() {
@@ -84,13 +115,26 @@ function Paddle(paddle_x_position, paddle_y_position, width, height) {
 // dokeyDown function
 function doKeyDown(e) {
 	if (e.keyCode == 113) //Q
+	{
 		console.log("pressed Q");
+		upadteFirstPaddlePositionDown()
+	}
+
 	if (e.keyCode == 119) //W
+	{
 		console.log("pressed W");
+		upadteFirstPaddlePositionUp()
+	}
 	if (e.keyCode == 111) //O
+	{
 		console.log("pressed O");
+		updateSecondPaddlePositionUp()
+	}
 	if (e.keyCode == 112) //P
+	{
 		console.log("pressed P");
+		updateSecondPaddlePositionDown()
+	}
 }
 
 
@@ -99,5 +143,7 @@ function init() {
 	var canvas = document.getElementById(canvasId);
 	window.addEventListener("keypress", doKeyDown, true)
 	ctx = canvas.getContext("2d");
+	var paddle = new Paddle(firstPaddle_x, firstPaddle_y, paddleWidth, paddleHeight)
+	var paddle = new Paddle(secondPaddle_x, secondPaddle_y, paddleWidth, paddleHeight)
 	var interval = setInterval(updateCanvas, 10);
 }
