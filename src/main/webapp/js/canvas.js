@@ -169,11 +169,30 @@ function doKeyDown(e) {
 }
 
 function doMouseMove(e) {
+
 	var canvas = document.getElementById(canvasId);
 	var rect = canvas.getBoundingClientRect();
-          var mouse_x = e.x - rect.left
-          var mouse_y = e.y - rect.top
-          console.log(mouse_x,mouse_y)
+	var mouse_x = e.x - rect.left
+	var mouse_y = e.y - rect.top
+
+
+	console.log(mouse_x, mouse_y)
+	if (mouse_x > canvasHeight / 2) {
+
+		if (mouse_y > canvasWidth/2) {
+			console.log("right and down")
+		} else {
+			console.log("right and up")
+		}
+
+	} else {
+		if (mouse_y > canvasWidth/2) {
+			console.log("left and down")
+		} else {
+			console.log("left and up")
+		}
+		
+	}
 
 }
 
@@ -185,5 +204,5 @@ function init() {
 	ctx = canvas.getContext("2d");
 	var paddle = new Paddle(firstPaddle_x, firstPaddle_y, paddleWidth, paddleHeight)
 	var paddle = new Paddle(secondPaddle_x, secondPaddle_y, paddleWidth, paddleHeight)
-	// interval = setInterval(updateCanvas, 10);
+		// interval = setInterval(updateCanvas, 10);
 }
