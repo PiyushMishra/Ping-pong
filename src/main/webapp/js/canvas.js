@@ -82,24 +82,24 @@ function updateSecondPaddlePositionDown() {
 // update ball position
 function moveBall() {
 
-	console.log(ball_y,ball_x);
-	
+	console.log(ball_y, ball_x);
+
 	var ball = new Ball(ball_x, ball_y, radius);
 
 	if ((ball_x + ball_x_displacement == firstPaddle_x + paddleWidth)) {
 		if ((ball_y + radius >= firstPaddle_y) && (ball_y + radius <= firstPaddle_y + paddleHeight)) {
-			console.log("touch", ball_y,ball_x)
+			console.log("touch", ball_y, ball_x)
 			ball_x_displacement = -ball_x_displacement;
 		}
-		
+
 	}
 
 	if ((ball_x + ball_x_displacement == secondPaddle_x)) {
 		if ((ball_y + radius >= secondPaddle_y) && (ball_y + radius <= secondPaddle_y + paddleHeight)) {
-			console.log("touch", ball_y,ball_x)
+			console.log("touch", ball_y, ball_x)
 			ball_x_displacement = -ball_x_displacement;
 		}
-		
+
 	}
 
 	if (ball_y + radius > canvasWidth) {
@@ -168,13 +168,22 @@ function doKeyDown(e) {
 	}
 }
 
+function doMouseMove(e) {
+	var canvas = document.getElementById(canvasId);
+	var rect = canvas.getBoundingClientRect();
+          var mouse_x = e.x - rect.left
+          var mouse_y = e.y - rect.top
+          console.log(mouse_x,mouse_y)
+
+}
 
 // set interval to repaint canvas to put the illusion of ball movement	
 function init() {
 	var canvas = document.getElementById(canvasId);
 	window.addEventListener("keypress", doKeyDown, true)
+	canvas.addEventListener("mousemove", doMouseMove, true)
 	ctx = canvas.getContext("2d");
 	var paddle = new Paddle(firstPaddle_x, firstPaddle_y, paddleWidth, paddleHeight)
 	var paddle = new Paddle(secondPaddle_x, secondPaddle_y, paddleWidth, paddleHeight)
-	interval = setInterval(updateCanvas, 10);
+	// interval = setInterval(updateCanvas, 10);
 }
