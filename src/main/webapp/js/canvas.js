@@ -36,6 +36,8 @@ var paddle_displacement = 40
 // function to repaint the whole canvas on events  
 function updateCanvas() {
 	ctx.clearRect(paddleWidth, 0, canvasHeight - 2 * paddleWidth, canvasWidth);
+	var paddle = new Paddle(firstPaddle_x, firstPaddle_y, paddleWidth, paddleHeight)
+	var paddle = new Paddle(secondPaddle_x, secondPaddle_y, paddleWidth, paddleHeight)
 	moveBall()
 }
 
@@ -108,9 +110,11 @@ function moveBall() {
 	}
 
 	if ((ball_x + radius > canvasHeight)) {
-		alert("game over")
+		
 		clearInterval(interval)
-     	// ball_x_displacement = -ball_x_displacement;
+		alert("game over")
+
+
 
 	}
 
