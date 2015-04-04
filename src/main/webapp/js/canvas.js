@@ -56,7 +56,6 @@ function upadteFirstPaddlePositionUp() {
 	if (firstPaddle_y > paddle_displacement) {
 		if (qDown == true) {
 			firstPaddle_y -= paddle_displacement
-			// var paddle = new Paddle(firstPaddle_x, firstPaddle_y, paddleWidth, paddleHeight)
 		}
 	}
 }
@@ -65,7 +64,6 @@ function upadteFirstPaddlePositionDown() {
 	if (firstPaddle_y + paddleHeight <= (canvasWidth)) {
 		if (wDown == true) {
 			firstPaddle_y += paddle_displacement
-			// var paddle = new Paddle(firstPaddle_x, firstPaddle_y, paddleWidth, paddleHeight)
 		}
 	}
 }
@@ -74,7 +72,6 @@ function updateSecondPaddlePositionUp() {
 	if (secondPaddle_y > paddle_displacement) {
 		if (oDown == true) {
 			secondPaddle_y -= paddle_displacement
-			// var paddle = new Paddle(secondPaddle_x, secondPaddle_y, paddleWidth, paddleHeight)
 		}
 	}
 }
@@ -83,7 +80,6 @@ function updateSecondPaddlePositionDown() {
 	if (secondPaddle_y + paddleHeight <= (canvasWidth)) {
 		if (pDown == true) {
 			secondPaddle_y += paddle_displacement
-			// var paddle = new Paddle(secondPaddle_x, secondPaddle_y, paddleWidth, paddleHeight)
 		}
 	}
 }
@@ -161,26 +157,22 @@ function doKeyDown(e) {
 	{
 		console.log("pressed Q");
 		qDown = true
-			// upadteFirstPaddlePositionDown()
 	}
 
 	if (e.keyCode == 87) //W
 	{
 		console.log("pressed W");
 		wDown = true
-			// upadteFirstPaddlePositionUp()
 	}
 	if (e.keyCode == 79) //O
 	{
 		console.log("pressed O");
 		oDown = true
-			// updateSecondPaddlePositionUp()
 	}
 	if (e.keyCode == 80) //P
 	{
 		console.log("pressed P");
 		pDown = true
-			// updateSecondPaddlePositionDown()
 	}
 }
 
@@ -190,26 +182,21 @@ function doKeyUp(e) {
 	{
 		console.log("Q up");
 		qDown = false
-			// upadteFirstPaddlePositionDown()
 	}
 
 	if (e.keyCode == 87) //W
 	{
-		console.log("W up");
-		wDown = false
-			// upadteFirstPaddlePositionUp()
+		console.log("W up")	
 	}
 	if (e.keyCode == 79) //O
 	{
 		console.log("O up");
 		oDown = false
-			// updateSecondPaddlePositionUp()
 	}
 	if (e.keyCode == 80) //P
 	{
 		console.log("P up");
 		pDown = false
-			// updateSecondPaddlePositionDown()
 	}
 }
 
