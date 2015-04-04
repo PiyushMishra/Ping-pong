@@ -35,7 +35,7 @@ var paddle_displacement = 40
 
 // function to repaint the whole canvas on events  
 function updateCanvas() {
-	ctx.clearRect(paddleWidth, 0, canvasHeight - 2 * paddleWidth, canvasWidth);
+	ctx.clearRect(0, 0, canvasHeight, canvasWidth);
 	var paddle = new Paddle(firstPaddle_x, firstPaddle_y, paddleWidth, paddleHeight)
 	var paddle = new Paddle(secondPaddle_x, secondPaddle_y, paddleWidth, paddleHeight)
 	moveBall()
