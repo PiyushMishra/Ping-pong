@@ -6,7 +6,7 @@
 var canvasHeight = 700;
 var canvasWidth = 500;
 
-//  ball coordinates
+//  ball coordinates	
 var ball_x = 350;
 var ball_y = 250;
 var radius = 12;
@@ -31,7 +31,7 @@ var secondPaddle_x = canvasHeight - paddleWidth
 var secondPaddle_y = 200
 
 // paddle displacement 
-var paddle_displacement = 10
+var paddle_displacement = 5
 
 var qDown = false
 var wDown = false
@@ -187,6 +187,7 @@ function doKeyUp(e) {
 	if (e.keyCode == 87) //W
 	{
 		console.log("W up")	
+		wDown = false
 	}
 	if (e.keyCode == 79) //O
 	{
