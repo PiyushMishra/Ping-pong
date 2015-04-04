@@ -181,15 +181,19 @@ function doMouseMove(e) {
 
 		if (mouse_y > canvasWidth/2) {
 			console.log("right and down")
+			updateSecondPaddlePositionDown()
 		} else {
 			console.log("right and up")
+			updateSecondPaddlePositionUp()
 		}
 
 	} else {
 		if (mouse_y > canvasWidth/2) {
 			console.log("left and down")
+			upadteFirstPaddlePositionDown()
 		} else {
 			console.log("left and up")
+			upadteFirstPaddlePositionUp()
 		}
 		
 	}
@@ -204,5 +208,5 @@ function init() {
 	ctx = canvas.getContext("2d");
 	var paddle = new Paddle(firstPaddle_x, firstPaddle_y, paddleWidth, paddleHeight)
 	var paddle = new Paddle(secondPaddle_x, secondPaddle_y, paddleWidth, paddleHeight)
-		// interval = setInterval(updateCanvas, 10);
+		interval = setInterval(updateCanvas, 10);
 }
