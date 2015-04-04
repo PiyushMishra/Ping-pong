@@ -9,7 +9,7 @@ var canvasWidth = 500;
 //  ball coordinates	
 var ball_x = 350;
 var ball_y = 250;
-var radius = 12;
+var radius = 9;
 
 // ball displacement parameters 
 var ball_x_displacement = 3;
@@ -236,5 +236,5 @@ function init() {
 	window.addEventListener("keyup", doKeyUp, true)
 	canvas.addEventListener("mousemove", doMouseMove, true)
 	ctx = canvas.getContext("2d");
-	interval = setInterval(updateCanvas, 10);
+	interval = setInterval(updateCanvas, 7);
 }
