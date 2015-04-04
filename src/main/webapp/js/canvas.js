@@ -31,52 +31,60 @@ var secondPaddle_x = canvasHeight - paddleWidth
 var secondPaddle_y = 200
 
 // paddle displacement 
-var paddle_displacement = 40
+var paddle_displacement = 10
+
+var qDown = false
+var wDown = false
+var oDown = false
+var pDown = false
 
 // function to repaint the whole canvas on events  
 function updateCanvas() {
 	ctx.clearRect(0, 0, canvasHeight, canvasWidth);
+	upadteFirstPaddlePositionUp()
+	upadteFirstPaddlePositionDown()
+	updateSecondPaddlePositionUp()
+	updateSecondPaddlePositionDown()
 	var paddle = new Paddle(firstPaddle_x, firstPaddle_y, paddleWidth, paddleHeight)
 	var paddle = new Paddle(secondPaddle_x, secondPaddle_y, paddleWidth, paddleHeight)
-	moveBall()
+    moveBall()
 }
 
 // update paddle positions
 
 function upadteFirstPaddlePositionUp() {
 	if (firstPaddle_y > paddle_displacement) {
-		ctx.clearRect(firstPaddle_x, firstPaddle_y, paddleWidth, paddleHeight);
-		firstPaddle_y -= paddle_displacement
-		var paddle = new Paddle(firstPaddle_x, firstPaddle_y, paddleWidth, paddleHeight)
-		console.log(firstPaddle_y)
+		if (qDown == true) {
+			firstPaddle_y -= paddle_displacement
+			// var paddle = new Paddle(firstPaddle_x, firstPaddle_y, paddleWidth, paddleHeight)
+		}
 	}
 }
 
 function upadteFirstPaddlePositionDown() {
-
 	if (firstPaddle_y + paddleHeight <= (canvasWidth)) {
-		ctx.clearRect(firstPaddle_x, firstPaddle_y, paddleWidth, paddleHeight);
-		firstPaddle_y += paddle_displacement
-		var paddle = new Paddle(firstPaddle_x, firstPaddle_y, paddleWidth, paddleHeight)
-
+		if (wDown == true) {
+			firstPaddle_y += paddle_displacement
+			// var paddle = new Paddle(firstPaddle_x, firstPaddle_y, paddleWidth, paddleHeight)
+		}
 	}
 }
 
 function updateSecondPaddlePositionUp() {
 	if (secondPaddle_y > paddle_displacement) {
-		ctx.clearRect(secondPaddle_x, secondPaddle_y, paddleWidth, paddleHeight);
-		secondPaddle_y -= paddle_displacement
-		var paddle = new Paddle(secondPaddle_x, secondPaddle_y, paddleWidth, paddleHeight)
-
+		if (oDown == true) {
+			secondPaddle_y -= paddle_displacement
+			// var paddle = new Paddle(secondPaddle_x, secondPaddle_y, paddleWidth, paddleHeight)
+		}
 	}
 }
 
 function updateSecondPaddlePositionDown() {
 	if (secondPaddle_y + paddleHeight <= (canvasWidth)) {
-		ctx.clearRect(secondPaddle_x, (secondPaddle_y), paddleWidth, paddleHeight);
-		secondPaddle_y += paddle_displacement
-		var paddle = new Paddle(secondPaddle_x, secondPaddle_y, paddleWidth, paddleHeight)
-
+		if (pDown == true) {
+			secondPaddle_y += paddle_displacement
+			// var paddle = new Paddle(secondPaddle_x, secondPaddle_y, paddleWidth, paddleHeight)
+		}
 	}
 }
 
@@ -106,16 +114,11 @@ function moveBall() {
 
 	if (ball_y + radius > canvasWidth) {
 		ball_y_displacement = -ball_y_displacement;
-		
 	}
 
 	if ((ball_x + radius > canvasHeight)) {
-		
 		clearInterval(interval)
 		alert("game over")
-
-
-
 	}
 
 	if (ball_y - radius < 0) {
@@ -124,8 +127,7 @@ function moveBall() {
 
 	if (ball_x - radius < 0) {
 		alert("game over")
-		clearInterval(interval)
-		// ball_x_displacement = -ball_x_displacement;
+		clearInterval(interval);
 	}
 
 	ball_x += ball_x_displacement;
@@ -155,26 +157,59 @@ function Paddle(paddle_x_position, paddle_y_position, width, height) {
 
 // dokeyDown function
 function doKeyDown(e) {
-	if (e.keyCode == 113) //Q
+	if (e.keyCode == 81) //Q
 	{
 		console.log("pressed Q");
-		upadteFirstPaddlePositionDown()
+		qDown = true
+			// upadteFirstPaddlePositionDown()
 	}
 
-	if (e.keyCode == 119) //W
+	if (e.keyCode == 87) //W
 	{
 		console.log("pressed W");
-		upadteFirstPaddlePositionUp()
+		wDown = true
+			// upadteFirstPaddlePositionUp()
 	}
-	if (e.keyCode == 111) //O
+	if (e.keyCode == 79) //O
 	{
 		console.log("pressed O");
-		updateSecondPaddlePositionUp()
+		oDown = true
+			// updateSecondPaddlePositionUp()
 	}
-	if (e.keyCode == 112) //P
+	if (e.keyCode == 80) //P
 	{
 		console.log("pressed P");
-		updateSecondPaddlePositionDown()
+		pDown = true
+			// updateSecondPaddlePositionDown()
+	}
+}
+
+// dokeyUp function
+function doKeyUp(e) {
+	if (e.keyCode == 81) //Q
+	{
+		console.log("Q up");
+		qDown = false
+			// upadteFirstPaddlePositionDown()
+	}
+
+	if (e.keyCode == 87) //W
+	{
+		console.log("W up");
+		wDown = false
+			// upadteFirstPaddlePositionUp()
+	}
+	if (e.keyCode == 79) //O
+	{
+		console.log("O up");
+		oDown = false
+			// updateSecondPaddlePositionUp()
+	}
+	if (e.keyCode == 80) //P
+	{
+		console.log("P up");
+		pDown = false
+			// updateSecondPaddlePositionDown()
 	}
 }
 
@@ -209,10 +244,9 @@ function doMouseMove(e) {
 // set interval to repaint canvas to put the illusion of ball movement	
 function init() {
 	var canvas = document.getElementById(canvasId);
-	window.addEventListener("keypress", doKeyDown, true)
+	window.addEventListener("keydown", doKeyDown, true)
+	window.addEventListener("keyup", doKeyUp, true)
 	canvas.addEventListener("mousemove", doMouseMove, true)
 	ctx = canvas.getContext("2d");
-	var paddle = new Paddle(firstPaddle_x, firstPaddle_y, paddleWidth, paddleHeight)
-	var paddle = new Paddle(secondPaddle_x, secondPaddle_y, paddleWidth, paddleHeight)
 	interval = setInterval(updateCanvas, 10);
 }
