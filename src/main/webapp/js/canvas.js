@@ -12,8 +12,8 @@ var ball_y = 250;
 var radius = 12;
 
 // ball displacement parameters 
-var ball_x_displacement = 10;
-var ball_y_displacement = 10;
+var ball_x_displacement = 3;
+var ball_y_displacement = 3;
 
 // canvas
 var canvasId = "canvas";
@@ -104,10 +104,14 @@ function moveBall() {
 
 	if (ball_y + radius > canvasWidth) {
 		ball_y_displacement = -ball_y_displacement;
+		
 	}
 
 	if ((ball_x + radius > canvasHeight)) {
-		ball_x_displacement = -ball_x_displacement;
+		alert("game over")
+		clearInterval(interval)
+     	// ball_x_displacement = -ball_x_displacement;
+
 	}
 
 	if (ball_y - radius < 0) {
@@ -115,7 +119,9 @@ function moveBall() {
 	}
 
 	if (ball_x - radius < 0) {
-		ball_x_displacement = -ball_x_displacement;
+		alert("game over")
+		clearInterval(interval)
+		// ball_x_displacement = -ball_x_displacement;
 	}
 
 	ball_x += ball_x_displacement;
@@ -179,19 +185,19 @@ function doMouseMove(e) {
 	console.log(mouse_x, mouse_y)
 	if (mouse_x > canvasHeight / 2) {
 
-		if (mouse_y > canvasWidth/2) {
+		if (mouse_y > canvasWidth / 2) {
 			console.log("right and down")
 		} else {
 			console.log("right and up")
 		}
 
 	} else {
-		if (mouse_y > canvasWidth/2) {
+		if (mouse_y > canvasWidth / 2) {
 			console.log("left and down")
 		} else {
 			console.log("left and up")
 		}
-		
+
 	}
 
 }
@@ -204,5 +210,5 @@ function init() {
 	ctx = canvas.getContext("2d");
 	var paddle = new Paddle(firstPaddle_x, firstPaddle_y, paddleWidth, paddleHeight)
 	var paddle = new Paddle(secondPaddle_x, secondPaddle_y, paddleWidth, paddleHeight)
-		// interval = setInterval(updateCanvas, 10);
+	interval = setInterval(updateCanvas, 10);
 }
