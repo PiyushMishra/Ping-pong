@@ -108,7 +108,7 @@ function moveBall() {
 
 	}
 
-	if ((ball_x + radius > secondPaddle_x)) {
+	if ((ball_x + radius == secondPaddle_x)) {
 		if ((ball_y >= secondPaddle_y) && (ball_y <= secondPaddle_y + paddleHeight)) {
 			sscore += 100
 			if (sscore % 200 == 0) {
