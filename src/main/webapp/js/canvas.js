@@ -96,8 +96,6 @@ function moveBall() {
 
 	console.log(ball_y, ball_x);
 
-	var ball = new Ball(ball_x, ball_y, radius);
-
 	if ((ball_x + radius == firstPaddle_x + paddleWidth)) {
 		if ((ball_y + radius >= firstPaddle_y) && (ball_y + radius <= firstPaddle_y + paddleHeight)) {
 			fscore += 100
@@ -112,7 +110,7 @@ function moveBall() {
 	}
 
 	if ((ball_x + radius == secondPaddle_x)) {
-		if ((ball_y + radius > secondPaddle_y) && (ball_y + radius < secondPaddle_y + paddleHeight)) {
+		if ((ball_y + radius >= secondPaddle_y) && (ball_y + radius <= secondPaddle_y + paddleHeight)) {
 			sscore += 100
 			if (sscore % 200 == 0) {
 				ball_x_displacement += 1
@@ -124,25 +122,17 @@ function moveBall() {
 
 	}
 
-	if (ball_y + radius > canvasWidth) {
+	if ((ball_y + radius > canvasWidth) || (ball_y - radius < 0)) {
 		ball_y_displacement = -ball_y_displacement;
 	}
 
-	if ((ball_x + radius > canvasHeight)) {
+	if ((ball_x + radius > canvasHeight) || (ball_x - radius < 0)) {
 		clearInterval(interval)
 		drawText("Game Over", 300, canvasWidth / 2)
 	}
 
-	if (ball_y - radius < 0) {
-		ball_y_displacement = -ball_y_displacement;
-	}
 
-	if (ball_x - radius < 0) {
-		clearInterval(interval)
-		drawText("Game Over", 300, canvasWidth / 2)
-
-	}
-
+	var ball = new Ball(ball_x, ball_y, radius);
 	ball_x += ball_x_displacement;
 	ball_y += ball_y_displacement;
 	return ball;
@@ -297,5 +287,5 @@ function init() {
 	window.addEventListener("keyup", doKeyUp, true)
 	canvas.addEventListener("mousemove", doMouseMove, true)
 	ctx = canvas.getContext("2d");
-	interval = setInterval(updateCanvas, 7);
+	interval = setInterval(updateCanvas, 10);
 }
