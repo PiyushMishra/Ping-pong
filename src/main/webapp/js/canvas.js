@@ -38,6 +38,10 @@ var wDown
 var oDown
 var pDown
 
+// player score
+var fscore
+var sscore
+
 // function to repaint the whole canvas on events  
 function updateCanvas() {
 	ctx.clearRect(0, 0, canvasHeight, canvasWidth);
@@ -47,6 +51,8 @@ function updateCanvas() {
 	updateSecondPaddlePositionDown()
 	var paddle = new Paddle(firstPaddle_x, firstPaddle_y, paddleWidth, paddleHeight)
 	var paddle = new Paddle(secondPaddle_x, secondPaddle_y, paddleWidth, paddleHeight)
+	drawText("score " + fscore, 30, 30)
+	drawText("score " + sscore, canvasHeight - 90, 30)
 	moveBall()
 }
 
@@ -94,6 +100,11 @@ function moveBall() {
 
 	if ((ball_x + ball_x_displacement == firstPaddle_x + paddleWidth)) {
 		if ((ball_y + radius >= firstPaddle_y) && (ball_y + radius <= firstPaddle_y + paddleHeight)) {
+			fscore += 100
+			if (fscore % 200 == 0) {
+				ball_x_displacement += 1
+				ball_y_displacement += 1
+			}
 			console.log("touch", ball_y, ball_x)
 			ball_x_displacement = -ball_x_displacement;
 		}
@@ -102,6 +113,11 @@ function moveBall() {
 
 	if ((ball_x + ball_x_displacement == secondPaddle_x)) {
 		if ((ball_y + radius >= secondPaddle_y) && (ball_y + radius <= secondPaddle_y + paddleHeight)) {
+			sscore += 100
+			if (sscore % 200 == 0) {
+				ball_x_displacement += 1
+				ball_y_displacement += 1
+			}
 			console.log("touch", ball_y, ball_x)
 			ball_x_displacement = -ball_x_displacement;
 		}
@@ -114,7 +130,7 @@ function moveBall() {
 
 	if ((ball_x + radius > canvasHeight)) {
 		clearInterval(interval)
-		drawText("Game Over", 300, canvasWidth/2)
+		drawText("Game Over", 300, canvasWidth / 2)
 	}
 
 	if (ball_y - radius < 0) {
@@ -123,7 +139,7 @@ function moveBall() {
 
 	if (ball_x - radius < 0) {
 		clearInterval(interval)
-		drawText("Game Over", 300, canvasWidth/2)
+		drawText("Game Over", 300, canvasWidth / 2)
 
 	}
 
@@ -153,7 +169,7 @@ function Paddle(paddle_x_position, paddle_y_position, width, height) {
 }
 
 function drawText(text, x, y) {
-	ctx.fillStyle = "white";
+	ctx.fillStyle = "purple";
 	ctx.font = "bold 16px Arial";
 	ctx.fillText(text, x, y);
 }
@@ -238,6 +254,9 @@ function doMouseMove(e) {
 
 // set interval to repaint canvas to put the illusion of ball movement	
 function init() {
+
+	fscore = 0
+	sscore = 0
 
 	canvasHeight = 700;
 	canvasWidth = 500;
