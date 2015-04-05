@@ -97,7 +97,7 @@ function moveBall() {
 	console.log(ball_y, ball_x);
 
 	if ((ball_x - radius < firstPaddle_x + paddleWidth)) {
-		if ((ball_y - radius > firstPaddle_y) && (ball_y - radius < firstPaddle_y + paddleHeight)) {
+		if ((ball_y >= firstPaddle_y) && (ball_y <= firstPaddle_y + paddleHeight)) {
 			fscore += 100
 			if (fscore % 200 == 0) {
 				ball_x_displacement -= 1
@@ -109,7 +109,7 @@ function moveBall() {
 	}
 
 	if ((ball_x + radius > secondPaddle_x)) {
-		if ((ball_y - radius > secondPaddle_y) && (ball_y - radius < secondPaddle_y + paddleHeight)) {
+		if ((ball_y >= secondPaddle_y) && (ball_y <= secondPaddle_y + paddleHeight)) {
 			sscore += 100
 			if (sscore % 200 == 0) {
 				ball_x_displacement +=1
