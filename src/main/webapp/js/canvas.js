@@ -100,7 +100,7 @@ function moveBall() {
 		if ((ball_y - radius > firstPaddle_y) && (ball_y - radius < firstPaddle_y + paddleHeight)) {
 			fscore += 100
 			if (fscore % 200 == 0) {
-				ball_x_displacement += 1
+				ball_x_displacement -= 1
 			}
 			console.log("touch", ball_y, ball_x)
 			ball_x_displacement = -ball_x_displacement;
