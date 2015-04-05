@@ -3,40 +3,40 @@
  */
 
 // canvas coordinates
-var canvasHeight = 700;
-var canvasWidth = 500;
+var canvasHeight
+var canvasWidth
 
 //  ball coordinates	
-var ball_x = 350;
-var ball_y = 250;
-var radius = 9;
+var ball_x
+var ball_y
+var radius
 
 // ball displacement parameters 
-var ball_x_displacement = 3;
-var ball_y_displacement = 3;
+var ball_x_displacement
+var ball_y_displacement
 
 // canvas
-var canvasId = "canvas";
+var canvasId
 var ctx;
 var interval;
 
 // first paddle coordinates
-var paddleHeight = 150
-var paddleWidth = 20
-var firstPaddle_x = 0
-var firstPaddle_y = 200
+var paddleHeight
+var paddleWidth
+var firstPaddle_x
+var firstPaddle_y
 
 // second paddle coordinates
-var secondPaddle_x = canvasHeight - paddleWidth
-var secondPaddle_y = 200
+var secondPaddle_x
+var secondPaddle_y
 
 // paddle displacement 
-var paddle_displacement = 5
+var paddle_displacement
 
-var qDown = false
-var wDown = false
-var oDown = false
-var pDown = false
+var qDown
+var wDown
+var oDown
+var pDown
 
 // function to repaint the whole canvas on events  
 function updateCanvas() {
@@ -47,7 +47,7 @@ function updateCanvas() {
 	updateSecondPaddlePositionDown()
 	var paddle = new Paddle(firstPaddle_x, firstPaddle_y, paddleWidth, paddleHeight)
 	var paddle = new Paddle(secondPaddle_x, secondPaddle_y, paddleWidth, paddleHeight)
-    moveBall()
+	moveBall()
 }
 
 // update paddle positions
@@ -114,7 +114,7 @@ function moveBall() {
 
 	if ((ball_x + radius > canvasHeight)) {
 		clearInterval(interval)
-		alert("game over")
+		drawText("Game Over", 300, canvasWidth/2)
 	}
 
 	if (ball_y - radius < 0) {
@@ -122,8 +122,9 @@ function moveBall() {
 	}
 
 	if (ball_x - radius < 0) {
-		alert("game over")
-		clearInterval(interval);
+		clearInterval(interval)
+		drawText("Game Over", 300, canvasWidth/2)
+
 	}
 
 	ball_x += ball_x_displacement;
@@ -149,6 +150,12 @@ function Paddle(paddle_x_position, paddle_y_position, width, height) {
 	ctx.lineWidth = 7;
 	ctx.strokeStyle = 'black';
 	ctx.stroke();
+}
+
+function drawText(text, x, y) {
+	ctx.fillStyle = "white";
+	ctx.font = "bold 16px Arial";
+	ctx.fillText(text, x, y);
 }
 
 // dokeyDown function
@@ -186,7 +193,7 @@ function doKeyUp(e) {
 
 	if (e.keyCode == 87) //W
 	{
-		console.log("W up")	
+		console.log("W up")
 		wDown = false
 	}
 	if (e.keyCode == 79) //O
@@ -231,7 +238,42 @@ function doMouseMove(e) {
 
 // set interval to repaint canvas to put the illusion of ball movement	
 function init() {
-	var canvas = document.getElementById(canvasId);
+
+	canvasHeight = 700;
+	canvasWidth = 500;
+
+	//  ball coordinates	
+	ball_x = canvasHeight / 2;
+	ball_y = canvasWidth / 2;
+	radius = 9;
+
+	// ball displacement parameters 
+	ball_x_displacement = 3;
+	ball_y_displacement = 3;
+
+	// canvas
+	canvasId = "canvas";
+
+	interval;
+
+	// first paddle coordinates
+	paddleHeight = 150
+	paddleWidth = 20
+	firstPaddle_x = 0
+	firstPaddle_y = 200
+
+	// second paddle coordinates
+	secondPaddle_x = canvasHeight - paddleWidth
+	secondPaddle_y = 200
+
+	// paddle displacement 
+	paddle_displacement = 5
+
+	qDown = false
+	wDown = false
+	oDown = false
+	pDown = false
+	canvas = document.getElementById(canvasId);
 	window.addEventListener("keydown", doKeyDown, true)
 	window.addEventListener("keyup", doKeyUp, true)
 	canvas.addEventListener("mousemove", doMouseMove, true)
