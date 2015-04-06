@@ -152,7 +152,7 @@ function Paddle(paddle_x_position, paddle_y_position, width, height) {
 	ctx.fillStyle = '#5A0E53';
 	ctx.fill();
 	ctx.lineWidth = 7;
-	ctx.strokeStyle = 'black';
+	ctx.strokeStyle = 'white';
 	ctx.stroke();
 }
 
@@ -212,16 +212,6 @@ function doKeyUp(e) {
 	}
 }
 
-function checkMouseMoveDirection(currentMouse_y, mouse_old_y) {
-	console.log("hello", currentMouse_y, mouse_old_y)
-	if (currentMouse_y > mouse_old_y) {
-		console.log("Going down")
-	} else {
-		console.log("Going up")
-	}
-	oldMouse_y = currentMouse_y
-}
-
 function doMouseMove(e) {
 
 	var canvas = document.getElementById(canvasId);
@@ -230,9 +220,9 @@ function doMouseMove(e) {
 	var mouse_y = e.y - rect.top
 
 	if (mouse_x > canvasHeight / 2) {
-		checkMouseMoveDirection(mouse_y, oldMouse_y)
+		secondPaddle_y = mouse_y
 	} else {
-		checkMouseMoveDirection(mouse_y, oldMouse_y)
+		firstPaddle_y = mouse_y
 
 	}
 
