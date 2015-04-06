@@ -42,6 +42,8 @@ var pDown
 var fscore
 var sscore
 
+var oldMouse_y
+
 // function to repaint the whole canvas on events  
 function updateCanvas() {
 	ctx.clearRect(0, 0, canvasHeight, canvasWidth);
@@ -110,7 +112,7 @@ function moveBall() {
 		if (ball_x + radius > secondPaddle_x) {
 			sscore += 100
 			if (sscore % 200 == 0) {
-				ball_x_displacement +=1
+				ball_x_displacement += 1
 			}
 			console.log("touch", ball_y, ball_x)
 			ball_x_displacement = -ball_x_displacement;
@@ -210,6 +212,16 @@ function doKeyUp(e) {
 	}
 }
 
+function checkMouseMoveDirection(currentMouse_y, mouse_old_y) {
+	console.log("hello", currentMouse_y, mouse_old_y)
+	if (currentMouse_y > mouse_old_y) {
+		console.log("Going down")
+	} else {
+		console.log("Going up")
+	}
+	oldMouse_y = currentMouse_y
+}
+
 function doMouseMove(e) {
 
 	var canvas = document.getElementById(canvasId);
@@ -217,22 +229,10 @@ function doMouseMove(e) {
 	var mouse_x = e.x - rect.left
 	var mouse_y = e.y - rect.top
 
-
-	console.log(mouse_x, mouse_y)
 	if (mouse_x > canvasHeight / 2) {
-
-		if (mouse_y > canvasWidth / 2) {
-			console.log("right and down")
-		} else {
-			console.log("right and up")
-		}
-
+		checkMouseMoveDirection(mouse_y, oldMouse_y)
 	} else {
-		if (mouse_y > canvasWidth / 2) {
-			console.log("left and down")
-		} else {
-			console.log("left and up")
-		}
+		checkMouseMoveDirection(mouse_y, oldMouse_y)
 
 	}
 
@@ -240,6 +240,8 @@ function doMouseMove(e) {
 
 // set interval to repaint canvas to put the illusion of ball movement	
 function init() {
+
+	oldMouse_y = 0
 
 	fscore = 0
 	sscore = 0
