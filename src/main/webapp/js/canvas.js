@@ -157,7 +157,7 @@ function Paddle(paddle_x_position, paddle_y_position, width, height) {
 }
 
 function drawText(text, x, y) {
-	ctx.fillStyle = "purple";
+	ctx.fillStyle = "yellow";
 	ctx.font = "bold 16px Arial";
 	ctx.fillText(text, x, y);
 }
@@ -220,9 +220,13 @@ function doMouseMove(e) {
 	var mouse_y = e.y - rect.top
 
 	if (mouse_x > canvasHeight / 2) {
-		secondPaddle_y = mouse_y
+		if (mouse_y + paddleHeight < canvasWidth) {
+			secondPaddle_y = mouse_y
+		}
 	} else {
-		firstPaddle_y = mouse_y
+		if (mouse_y + paddleHeight < canvasWidth) {
+			firstPaddle_y = mouse_y
+		}
 
 	}
 
