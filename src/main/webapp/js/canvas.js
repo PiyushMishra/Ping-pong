@@ -140,7 +140,7 @@ function moveBall() {
 function Ball(ball_x_position, ball_y_position, radius) {
 	ctx.beginPath();
 	ctx.arc(ball_x_position, ball_y_position, radius, Math.PI * 2, false);
-	ctx.fillStyle = "#C72129";
+	ctx.fillStyle = "#FFFFFF";
 	ctx.closePath();
 	ctx.fill();
 }
@@ -149,7 +149,7 @@ function Ball(ball_x_position, ball_y_position, radius) {
 function Paddle(paddle_x_position, paddle_y_position, width, height) {
 	ctx.beginPath();
 	ctx.rect(paddle_x_position, paddle_y_position, width, height);
-	ctx.fillStyle = '#5A0E53';
+	ctx.fillStyle = '#A000EC';
 	ctx.fill();
 	ctx.lineWidth = 7;
 	ctx.strokeStyle = 'white';
