@@ -46,6 +46,7 @@ var oldMouse_y
 
 // function to repaint the whole canvas on events  
 function updateCanvas() {
+	 interval = requestAnimationFrame(updateCanvas);
 	ctx.clearRect(0, 0, canvasHeight, canvasWidth);
 	upadteFirstPaddlePositionUp()
 	upadteFirstPaddlePositionDown()
@@ -56,6 +57,8 @@ function updateCanvas() {
 	drawText("score " + fscore, 30, 30)
 	drawText("score " + sscore, canvasHeight - 90, 30)
 	moveBall()
+   
+
 }
 
 // update paddle positions
@@ -125,7 +128,7 @@ function moveBall() {
 	}
 
 	if ((ball_x + radius > canvasHeight) || (ball_x - radius < 0)) {
-		clearInterval(interval)
+		cancelAnimationFrame(interval)
 		drawText("Game Over", 300, canvasWidth / 2)
 	}
 
@@ -279,5 +282,5 @@ function init() {
 	window.addEventListener("keyup", doKeyUp, true)
 	canvas.addEventListener("mousemove", doMouseMove, true)
 	ctx = canvas.getContext("2d");
-	interval = setInterval(updateCanvas, 10);
+	interval = requestAnimationFrame(updateCanvas);
 }
